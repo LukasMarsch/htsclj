@@ -3,9 +3,9 @@
             http.header
             http.req)
   (:import java.net.ServerSocket
-           (java.time LocalDateTime Clock)
            java.io.PrintWriter
-           java.nio.charset.Charset))
+           java.nio.charset.Charset)
+  (:gen-class))
 
 (def logs (log/init "htsclj.server" :debug))
 
