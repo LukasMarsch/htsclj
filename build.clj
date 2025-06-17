@@ -21,4 +21,4 @@
   (b/copy-dir {:src-dirs ["src" "resources"]
                :target-dir class-dir})
   (b/jar {:class-dir class-dir
-          :jar-dir jar-file}))
+          :jar-file jar-file}))
