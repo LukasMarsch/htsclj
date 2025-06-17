@@ -45,17 +45,18 @@
                    "\r\n\r\n"
                    content))))))
 
-(let [ssocket (server 8080)]
-  (while true
-    (let [boundSock (.accept ssocket)]
-      (if (.isConnected boundSock)
-        (do
-          ((logs :trace) (str "connected to: "  (.toString (.getInetAddress boundSock))))
-          (.setSendBufferSize boundSock 1024)
-          (let [outputStream (.getOutputStream boundSock)
-                request (getReq boundSock)]
-            (let [request-info (http.req/req request)]
-              ((logs :info) (str (request-info :method) " " (request-info :path)))
-              (write-bytes outputStream (response request-info))
-              (.close boundSock)
-            )))))))
+(defn -main []
+  (let [ssocket (server 8080)]
+    (while true
+      (let [boundSock (.accept ssocket)]
+        (if (.isConnected boundSock)
+          (do
+            ((logs :trace) (str "connected to: "  (.toString (.getInetAddress boundSock))))
+            (.setSendBufferSize boundSock 1024)
+            (let [outputStream (.getOutputStream boundSock)
+                  request (getReq boundSock)]
+              (let [request-info (http.req/req request)]
+                ((logs :info) (str (request-info :method) " " (request-info :path)))
+                (write-bytes outputStream (response request-info))
+                (.close boundSock)
+              ))))))))
