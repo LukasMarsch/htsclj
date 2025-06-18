@@ -14,15 +14,13 @@
   ([path] (try (slurp (str "src/htsclj/resources" path))
             (catch Exception e ((logs :error) (.getMessage e))))))
 
-(defn server [p]
-  "open a connection on port p and returns a new connection being made to it"
-  (ServerSocket. p))
+(defn server "open a connection on port p and returns a new connection being made to it"
+  [p] (ServerSocket. p))
 
-(defn getReq [socket]
-  "prints the request made to a socket"
-  (let [inputStream (.getInputStream socket)
-        length (.available inputStream)]
-        (apply str (map char (vec (.readNBytes inputStream length))))))
+(defn getReq  "returns the string reqresentation of the request made to a socket"
+  [socket] (let [inputStream (.getInputStream socket)
+    length (.available inputStream)]
+    (apply str (map char (vec (.readNBytes inputStream length))))))
 
 (defn write-bytes
   [ostr response] (let [printWriter (PrintWriter. ostr true (Charset/forName "UTF-8"))]
