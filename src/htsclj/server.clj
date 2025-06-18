@@ -12,7 +12,7 @@
 (defn file
   ([] (slurp "src/htsclj/resources/index.html"))
   ([path] (try (slurp (str "src/htsclj/resources" path))
-            (catch Exception e nil))))
+            (catch Exception e ((logs :error) (.getMessage e))))))
 
 (defn server [p]
   "open a connection on port p and returns a new connection being made to it"
