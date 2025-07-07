@@ -2,7 +2,9 @@
     
   :deps {
     log/log {:local/root "../log"}
-    http/http {:local/root "../http"}}
+    http/http {:local/root "../http"}
+    org.clojure/core.async {:mvn/version "1.8.741"}}
+
 
   :aliases {
     :src-paths ["src"]
